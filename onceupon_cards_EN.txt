@@ -1,0 +1,110 @@
+Aspect Blank
+Event Blank
+Item Blank
+Place Blank
+Character Blank
+Something is Revealed
+An Argument
+Journey
+An Object Breaks
+Someone is Hurt
+People Meet
+Time Passes
+A Fight
+Two People Fall in Love
+A Chase
+A Rescue
+People Part Company
+A Trap
+Transformation
+Treasure
+Spell
+Food
+Ring
+Crown
+Window
+Book
+Sword
+Boat
+Door
+Axe
+Fire
+Village
+Prison
+Forest
+Ruin
+River
+Night
+Cave
+Tower
+Mountain
+Kingdom
+Island
+At Sea
+Palace
+Cottage
+Town
+Road
+Very Wise
+Frightened
+Disguised
+Tiny
+Poisoned
+Very Strong
+Far Away
+Cursed
+Ugly
+This Can Fly
+Happy
+Lucky
+This Animal Can Talk
+Long-lost
+Stolen
+Hidden
+Beautiful
+Lost
+Sleeping
+Secret
+Old Man
+Bird
+Fairy
+Princess
+Witch
+Thief
+Stepmother
+Giant
+Old Woman
+Wolf
+Child
+Parent
+King
+Cook
+Queen
+Prince
+Beggar
+Shepherdess
+Enemy
+Brother/Sister
+Escape
+A Death
+Interrupt Item - Key
+Interrupt Item - Gift
+Interrupt Item - Tree
+Interrupt Item - Stairs
+Interrupt Place - Home
+Interrupt Place - Chapel
+Interrupt Place - Kitchen
+Interrupt Aspect - Insane
+Interrupt Aspect - This Item Can Talk
+Interrupt Aspect - Blind
+Interrupt Aspect - Stupid
+Interrupt Aspect - Evil
+Interrupt Character - Husband/Wife
+Interrupt Character - Monster
+Interrupt Character - Orphan
+Interrupt Character - Horse
+Interrupt Character - Frog
+Interrupt Event - Storm
+Interrupt Event - Plan
+Interrupt Event - Contest
+Interrupt Event - Dream
