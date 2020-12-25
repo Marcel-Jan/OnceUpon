@@ -8,7 +8,7 @@ __author__ = 'Marcel-Jan Krijgsman'
 logging.basicConfig(filename="fairytale_EN.log",
                     level=logging.DEBUG)
 
-MAIL_USER = "fairytale@family.org"
+MAIL_USER = "fairytale@fakefamily.org"
 MAIL_PASSWORD = keyring.get_password("mail", MAIL_USER)
 
 
@@ -39,18 +39,18 @@ def find_number_of_cards (d_number_of_players):
 
 
 def mail_intro_cards(d_player, receiver, cards, d_happily_card):
-    server = smtplib.SMTP('smtp.family.org', 587)
+    server = smtplib.SMTP('smtp.fakefamily.org', 587)
     login = MAIL_USER  # your login
     password = MAIL_PASSWORD  # your password
 
     server.login(MAIL_USER, MAIL_PASSWORD)
-    sender = 'fairytale@family.org'
+    sender = 'fairytale@fakefamily.org'
     receivers = receiver
 
     card_string = "\n ".join(cards)
 
     mail_subject = "Your Once Upon A Time cards are here"
-    mail_body = f"""From: From Fairy Tale <fairytale@family.org>
+    mail_body = f"""From: From Fairy Tale <fairytale@fakefamily.org>
     To: {receiver}
     
     Hello {d_player},
@@ -87,18 +87,18 @@ def mail_intro_cards(d_player, receiver, cards, d_happily_card):
 
 
 def mail_card(d_player, receiver, cards):
-    server = smtplib.SMTP('smtp.family.org', 587)
+    server = smtplib.SMTP('smtp.fakefamily.org', 587)
     login = MAIL_USER  # your login
     password = MAIL_PASSWORD  # your password
 
     server.login(MAIL_USER, MAIL_PASSWORD)
-    sender = 'fairytale@family.org'
+    sender = 'fairytale@fakefamily.org'
     receivers = receiver
 
     card_string = "\n ".join(cards)
 
     mail_subject = "Here is another Once Upon A Time card"
-    mail_body = f"""From: From Fairy Tale <fairytale@family.org>
+    mail_body = f"""From: From Fairy Tale <fairytale@fakefamily.org>
     To: {receiver}
 
     Hello {d_player},
@@ -127,6 +127,7 @@ def mail_card(d_player, receiver, cards):
 
 
 def deal_cards(card_stack, number_of_cards_to_deal):
+    logging.debug(f'deal_cards({card_stack}, {number_of_cards_to_deal})')
     cards_dealt = random.sample(card_stack, number_of_cards_to_deal)
 
     # Remove cards from the stack. We're not dealing these again.
@@ -137,6 +138,7 @@ def deal_cards(card_stack, number_of_cards_to_deal):
 
 
 def deal_happily_card(d_remaining_happily_stack):
+    logging.debug(f'deal_happily_card({d_remaining_happily_stack})')
     # happily_card[player] = deal_happily_card(remaining_happily_stack)
     pick_happily_card = random.choice(remaining_happily_stack)
     remaining_happily_stack.remove(pick_happily_card)
@@ -163,7 +165,7 @@ def play_card(d_dealt_cards, card_name):
         logging.debug(f'd_dealt_cards: {d_dealt_cards}')
         # print(f"d_dealt_cards: {d_dealt_cards}")
     else:
-        print(f"{card_name} is not in the cards!")
+        print(f'{card_name} is not in the cards!')
         logging.debug(f'{card_name} is not in the cards!')
     if len(d_dealt_cards) == 0:
         print("We have a winner!!")
@@ -176,9 +178,13 @@ def draw_card(d_player, d_dealt_cards, d_remaining_card_stack):
     # Pick random card from stack
     # print(f'd_dealt_cards: {d_dealt_cards}')
     logging.debug(f'd_dealt_cards: {d_dealt_cards}')
+    l_pick_card = []
     pick_card = random.choice(d_remaining_card_stack)
-    # print(f'pick_card: {pick_card}')
+    l_pick_card.append(pick_card)
+
     logging.debug(f'pick_card: {pick_card}')
+    logging.debug(f'l_pick_card: {l_pick_card}')
+
     # Add card to hand of player
     d_dealt_cards.append(pick_card)
     # print(f'd_dealt_cards: {d_dealt_cards}')
@@ -186,14 +192,16 @@ def draw_card(d_player, d_dealt_cards, d_remaining_card_stack):
     # Remove cards from the stack. We're not dealing these again.
     logging.debug(f'Remove {pick_card} from {d_remaining_card_stack}')
     d_remaining_card_stack.remove(pick_card)
-    # print(f'd_remaining_card_stack: {d_remaining_card_stack}')
-    # mail_cards(d_player, receiver, cards)
-    logging.debug(f'Mail {pick_card} to {d_player}. address {player_mail[d_player]}')
-    mail_card(d_player, player_mail[d_player], pick_card)
+
+    logging.debug(f'Mail {l_pick_card} to {d_player}. address {player_mail[d_player]}')
+
+    # Even though it's just one card, pick_card works better to use it in mail_card as a list.
+    mail_card(d_player, player_mail[d_player], l_pick_card)
     return d_dealt_cards, d_remaining_card_stack
 
 
 def search_cards(d_dealt_cards, search_term):
+    logging.debug(f'search_cards({d_dealt_cards}, {search_term})')
     print(f'Search term: {search_term}')
     logging.debug(f'Search term: {search_term}')
     search_result = [item for item in d_dealt_cards if search_term in item]
@@ -231,7 +239,7 @@ number_of_players = len(player_list)
 card_file = "onceupon_cards_EN.txt"
 card_list = load_cards(card_file)
 remaining_card_stack = card_list.copy()
-print(f"Number of Once Upon a Time cards: {len(remaining_card_stack)}")
+print(f'Number of Once Upon a Time cards: {len(remaining_card_stack)}')
 logging.debug(f'Number of Once Upon a Time cards: {len(remaining_card_stack)}')
 print(f'player_list: {player_list}')
 logging.debug(f'player_list: {player_list}')
@@ -252,7 +260,7 @@ logging.debug('number_of_cards: ' + str(number_of_cards))
 dealt_cards = {}
 happily_card = {}
 for player in player_list:
-    print('player: ' + player)
+    print(f'player: {player}')
     logging.debug(f'player: {player}')
     # Deal cards for one player
     remaining_card_stack, dealt_cards[player] = deal_cards(remaining_card_stack, number_of_cards)
