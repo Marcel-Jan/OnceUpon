@@ -14,7 +14,7 @@ MAIL_PASSWORD = keyring.get_password("mail", MAIL_USER)
 
 def load_cards(card_file):
     card_list = []
-    with open(card_file, 'r') as f:
+    with open(card_file, 'r', encoding='utf-8') as f:
         card_lines = f.readlines()
         for card_item in card_lines:
 
